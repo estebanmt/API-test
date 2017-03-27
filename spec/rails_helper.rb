@@ -10,6 +10,8 @@ require 'rspec/rails'
 # require database cleaner at the top level
 require 'database_cleaner'
 
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+
 # configure shoulda matchers to use rspec as the test framework and full matcher
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
@@ -81,4 +83,10 @@ RSpec.configure do |config|
       example.run
     end
   end
+end
+
+RSpec.configuration do |config|
+  # [...]
+  config.include RequestSpecHelper, type: :request
+  # [...]
 end
